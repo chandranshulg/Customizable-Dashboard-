@@ -4,7 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customizable Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS Styles */
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 20px;
+        }
+
+        .widget {
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .controls {
+            margin: 20px;
+            text-align: center;
+        }
+
+        .controls button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .controls button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <div class="dashboard">
@@ -12,5 +55,73 @@
         <div class="widget" id="widget-2">Widget 2</div>
         <div class="widget" id="widget-3">Widget 3</div>
     </div>
+    <div class="controls">
+        <button onclick="addWidget()">Add Widget</button>
+        <button onclick="removeWidget()">Remove Widget</button>
+    </div>
+
+    <script>
+        // JavaScript for interactivity
+
+        // Function to initialize widget actions
+        function initWidgets() {
+            const widgets = document.querySelectorAll('.widget');
+
+            widgets.forEach(widget => {
+                widget.addEventListener('click', () => {
+                    alert(`You clicked on ${widget.id}`);
+                });
+                widget.setAttribute('draggable', true);
+                widget.addEventListener('dragstart', dragStart);
+                widget.addEventListener('dragover', dragOver);
+                widget.addEventListener('drop', drop);
+            });
+        }
+
+        // Drag and Drop functions
+        let draggedWidget = null;
+
+        function dragStart(event) {
+            draggedWidget = event.target;
+            event.dataTransfer.effectAllowed = 'move';
+        }
+
+        function dragOver(event) {
+            event.preventDefault();
+            event.dataTransfer.dropEffect = 'move';
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            if (event.target.classList.contains('widget')) {
+                const dashboard = document.querySelector('.dashboard');
+                dashboard.insertBefore(draggedWidget, event.target.nextSibling);
+            }
+        }
+
+        // Function to add a new widget
+        function addWidget() {
+            const dashboard = document.querySelector('.dashboard');
+            const widgetCount = dashboard.querySelectorAll('.widget').length;
+            const newWidget = document.createElement('div');
+            newWidget.className = 'widget';
+            newWidget.id = `widget-${widgetCount + 1}`;
+            newWidget.textContent = `Widget ${widgetCount + 1}`;
+            dashboard.appendChild(newWidget);
+            initWidgets();
+        }
+
+        // Function to remove the last widget
+        function removeWidget() {
+            const dashboard = document.querySelector('.dashboard');
+            const widgets = dashboard.querySelectorAll('.widget');
+            if (widgets.length > 0) {
+                dashboard.removeChild(widgets[widgets.length - 1]);
+            }
+        }
+
+        // Initialize widgets when the page loads
+        window.onload = initWidgets;
+    </script>
 </body>
 </html>
