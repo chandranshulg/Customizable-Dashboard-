@@ -1,4 +1,4 @@
-Customizable Dashboard
+##Customizable Dashboard
 
 This is a simple customizable dashboard project built using HTML, CSS, and JavaScript. The dashboard allows users to interact with widgets by adding, removing, and rearranging them through drag-and-drop functionality.
 
@@ -6,12 +6,14 @@ This is a simple customizable dashboard project built using HTML, CSS, and JavaS
 
 You can view the live version of the Customizable Dashboard [here](https://chandranshulg.github.io/Customizable-Dashboard-/).
 
-Features
+##Features
 
 Dynamic Widget Management: Users can add or remove widgets to the dashboard.
 Drag-and-Drop: Widgets can be rearranged by dragging and dropping them into different positions.
 Interactivity: Clicking on a widget triggers an alert displaying the widget's ID.
-Project Structure
+
+
+##Project Structure
 The project consists of the following key files:
 
 index.html: The main HTML file that contains the structure of the dashboard.
@@ -24,7 +26,7 @@ git clone https://github.com/chandranshulg/customizable-dashboard.git
 Open the Project:
 Navigate to the project directory and open index.html in your preferred web browser.
 
-Interact with the Dashboard:
+#Interact with the Dashboard:
 
 Click the "Add Widget" button to add a new widget to the dashboard.
 Click the "Remove Widget" button to remove the last widget from the dashboard.
